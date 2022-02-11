@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "rm -rf ./dist && tsc --project ./",
+    "prepare": "npm run build",
     "docs": "rm -rf ./docs && typedoc",
     "test-all": "jest --runInBand",
     "test-unit": "jest --selectProjects unit",
