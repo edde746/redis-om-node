@@ -14,6 +14,14 @@ export default class WhereString<TEntity extends Entity> extends WhereField<TEnt
   equals(value: string): Search<TEntity> { return this.eq(value); }
   equalTo(value: string): Search<TEntity> { return this.eq(value); }
 
+  in(value: string[]): Search<TEntity> {
+    let search = this.eq(value[0]);
+    for (let entry of value.slice(1)) {
+      search = search.or(this.field.toString()).eq(entry);
+    }
+    return search;
+  }
+
   toString(): string {
     let matchPunctuation = /[,.<>{}[\]"':;!@#$%^&*()\-+=~| ]/g;
     let escapedValue = this.value.replace(matchPunctuation, '\\$&');
